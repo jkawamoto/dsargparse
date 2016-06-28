@@ -1,6 +1,8 @@
 dargparse
 ==========
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
+[![Build Status](https://travis-ci.org/jkawamoto/dargparse.svg?branch=master)](https://travis-ci.org/jkawamoto/dargparse)
+[![Code Climate](https://codeclimate.com/github/jkawamoto/dargparse/badges/gpa.svg)](https://codeclimate.com/github/jkawamoto/dargparse)
 
 dargparse is a wrapper of argparse library which prepares helps and descriptions
 from docstrings. It also sets up functions to be run for each sub command,
