@@ -11,6 +11,7 @@
 #
 """ Unit tests for dsargparse module.
 """
+import argparse
 import textwrap
 import unittest
 
@@ -89,6 +90,23 @@ class TestParser(unittest.TestCase):
             This function do something.
             """))
         self.assertEqual(len(ans["args"]), 0)
+
+
+class TestModule(unittest.TestCase):
+
+    def test_modules(self):
+        """ Test dsargparse module has same objects as argparse.
+        """
+        for name in argparse.__all__:
+            self.assertTrue(hasattr(dsargparse, name))
+
+    def test_filetype(self):
+        """ Test create dsargparse's filetype.
+        """
+        self.assertIsNotNone(dsargparse.FileType("r"))
+
+
+
 
 
 if __name__ == "__main__":

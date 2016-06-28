@@ -18,6 +18,11 @@ import itertools
 import inspect
 import textwrap
 
+for name in argparse.__all__:
+    if name != "ArgumentParser":
+        globals()[name] = getattr(argparse, name)
+
+
 _HELP = "help"
 _DESCRIPTION = "description"
 _FORMAT_CLASS = "formatter_class"
