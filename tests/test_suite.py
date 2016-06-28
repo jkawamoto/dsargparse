@@ -36,7 +36,7 @@ def main():
         res = unittest.TextTestRunner(verbosity=2).run(suite())
 
     except KeyboardInterrupt:
-        print "Test canceled."
+        print("Test canceled.")
         return -1
 
     else:
