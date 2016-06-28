@@ -5,7 +5,7 @@ import dsargparse
 
 setup(
     name="dsargparse",
-    version="0.1.0",
+    version="0.1.1",
     author="Junpei Kawamoto",
     author_email="kawamoto.junpei@gmail.com",
     description=dsargparse.__doc__,
