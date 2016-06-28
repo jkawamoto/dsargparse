@@ -1,12 +1,12 @@
 #! /usr/bin/env python
 # pylint: disable=superfluous-parens
-"""Sample command of dargparse package.
+"""Sample command of dsargparse package.
 
 This text will be used as description of this command.
 """
 import sys
 
-import dargparse
+import dsargparse
 
 
 def greeting(title, name): # pylint: disable=unused-argument
@@ -34,14 +34,14 @@ def goodbye(name): # pylint: disable=unused-argument
     return 0
 
 
-## Before `dargparse`.
+## Before `dsargparse`.
 # import textwrap
 # def main():
 #     """ The main function.
 #     """
-#     parser = dargparse.ArgumentParser(
+#     parser = argparse.ArgumentParser(
 #       description=textwrap.dedent("""\
-#         Sample command of dargparse package.
+#         Sample command of argparse package.
 #
 #         This text will be used as description of this command.
 #         """))
@@ -76,11 +76,11 @@ def goodbye(name): # pylint: disable=unused-argument
 #     args = parser.parse_args()
 #     return args.cmd(**args)
 
-# After `dargparse`.
+# After `dsargparse`.
 def main():
     """ The main function.
     """
-    parser = dargparse.ArgumentParser(main=main)
+    parser = dsargparse.ArgumentParser(main=main)
     subparsers = parser.add_subparsers()
 
     greeting_cmd = subparsers.add_parser(greeting)

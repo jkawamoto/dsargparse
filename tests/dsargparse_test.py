@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 # pylint: disable=protected-access
 #
-# dargparse_test.py
+# dsargparse_test.py
 #
 # Copyright (c) 2016 Junpei Kawamoto
 #
@@ -9,12 +9,12 @@
 #
 # http://opensource.org/licenses/mit-license.php
 #
-""" Unit tests for dargparse module.
+""" Unit tests for dsargparse module.
 """
 import textwrap
 import unittest
 
-import dargparse
+import dsargparse
 
 
 class TestParser(unittest.TestCase):
@@ -24,7 +24,7 @@ class TestParser(unittest.TestCase):
     def test_full_document(self):
         """Test for a full information docstring.
         """
-        ans = dargparse._parse_doc(dargparse._parse_doc.__doc__)
+        ans = dsargparse._parse_doc(dsargparse._parse_doc.__doc__)
 
         self.assertEqual(ans["headline"], "Parse a docstring.")
         self.assertEqual(ans["description"], textwrap.dedent("""\
@@ -39,7 +39,7 @@ class TestParser(unittest.TestCase):
     def test_minimum_document(self):
         """Test for a minimum docstring.
         """
-        ans = dargparse._parse_doc(dargparse._checker.__doc__)
+        ans = dsargparse._parse_doc(dsargparse._checker.__doc__)
         self.assertEqual(
             ans["headline"],
             "Generate a checker which tests a given value not starts with keywords.")
@@ -51,7 +51,7 @@ class TestParser(unittest.TestCase):
     def test_docstring_without_description(self):
         """ Test for a docstring which doesn't have descriptions.
         """
-        ans = dargparse._parse_doc("""Test docstring.
+        ans = dsargparse._parse_doc("""Test docstring.
 
         Args:
           one: definition of one.
@@ -73,7 +73,7 @@ class TestParser(unittest.TestCase):
     def test_docstring_without_args(self):
         """ Test for a docstring which doesn't have args.
         """
-        ans = dargparse._parse_doc("""Test docstring.
+        ans = dsargparse._parse_doc("""Test docstring.
 
         This function do something.
 

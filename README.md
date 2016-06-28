@@ -1,10 +1,10 @@
-dargparse
+dsargparse
 ==========
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
-[![Build Status](https://travis-ci.org/jkawamoto/dargparse.svg?branch=master)](https://travis-ci.org/jkawamoto/dargparse)
-[![Code Climate](https://codeclimate.com/github/jkawamoto/dargparse/badges/gpa.svg)](https://codeclimate.com/github/jkawamoto/dargparse)
+[![Build Status](https://travis-ci.org/jkawamoto/dsargparse.svg?branch=master)](https://travis-ci.org/jkawamoto/dsargparse)
+[![Code Climate](https://codeclimate.com/github/jkawamoto/dsargparse/badges/gpa.svg)](https://codeclimate.com/github/jkawamoto/dsargparse)
 
-dargparse is a wrapper of argparse library which prepares helps and descriptions
+dsargparse is a wrapper of argparse library which prepares helps and descriptions
 from docstrings. It also sets up functions to be run for each sub command,
 and provides a helper function which parses args and run a selected command.
 
@@ -17,7 +17,7 @@ Suppose to make a following trivial greeting command consists of two subcommands
 supplied as functions shown below.
 
 ```python
-"""Sample command of dargparse package.
+"""Sample command of dsargparse package.
 
 This text will be used as description of this command.
 """
@@ -46,9 +46,9 @@ def goodbye(name): # pylint: disable=unused-argument
     return 0
 ```
 
-The `dargparse` reduces codes you need from the **before**
+The `dsargparse` reduces codes you need from the **before**
 ```python
-# Before dargparse
+# Before dsargparse
 import sys
 import textwrap
 
@@ -59,7 +59,7 @@ def main():
     """
     parser = argparse.ArgumentParser(
       description=textwrap.dedent("""\
-        Sample command of dargparse package.
+        Sample command of argparse package.
 
         This text will be used as description of this command.
         """))
@@ -100,15 +100,15 @@ if __name__ == "__main__":
 ```
 to the **after**
 ```python
-# After dargparse
+# After dsargparse
 import sys
 
-import dargparse
+import dsargparse
 
 def main():
     """ The main function.
     """
-    parser = dargparse.ArgumentParser(main=main)
+    parser = dsargparse.ArgumentParser(main=main)
     subparsers = parser.add_subparsers()
 
     greeting_cmd = subparsers.add_parser(greeting)
@@ -128,15 +128,15 @@ if __name__ == "__main__":
 
 Usage
 ------
-`dargparse` is a simple wrapper of the original `argparse`. To use it, install
-this package and just adding `d` to your import command i.e. from
-`import argparse` to `import dargparse`. In addition to all API `argparse` has,
-`dargparse` updates three functions; constructor of `ArgumentParser` object,
+`dsargparse` is a simple wrapper of the original `argparse`. To use it, install
+this package and just adding `ds` to your import command i.e. from
+`import argparse` to `import dsargparse`. In addition to all API `argparse` has,
+`dsargparse` updates three functions; constructor of `ArgumentParser` object,
 `ArgumentParser.add_argument`, and `add_parser` method of the action class made
 by `ArgumentParser.add_subparsers()`, and give one new method
 `ArgumentParser.parse_and_run`.
 
-### `dargparse.ArgumentParser`
+### `dsargparse.ArgumentParser`
 In addition to the keyword arguments `argparse.ArgumentParser` takes,
 this constructor has keyword argument `main` which takes the main function.
 

@@ -13,7 +13,7 @@
 import sys
 import unittest
 
-from . import dargparse_test
+from . import dsargparse_test
 
 
 def suite():
@@ -22,7 +22,7 @@ def suite():
     loader = unittest.TestLoader()
     res = unittest.TestSuite()
 
-    res.addTest(loader.loadTestsFromModule(dargparse_test))
+    res.addTest(loader.loadTestsFromModule(dsargparse_test))
     return res
 
 

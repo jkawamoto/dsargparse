@@ -1,5 +1,5 @@
 #
-# dargparse.py
+# dsargparse.py
 #
 # Copyright (c) 2016 Junpei Kawamoto
 #
@@ -7,9 +7,9 @@
 #
 # http://opensource.org/licenses/mit-license.php
 #
-"""dargparse: docstring based argparse.
+"""dsargparse: docstring based argparse.
 
-dargparse is a wrapper of argparse library which prepares helps and descriptions
+dsargparse is a wrapper of argparse library which prepares helps and descriptions
 from docstrings. It also sets up functions to be run for each sub command,
 and provides a helper function which parses args and run a selected command.
 """
@@ -140,7 +140,7 @@ class ArgumentParser(argparse.ArgumentParser):
 
     This class takes same arguments as argparse.ArgumentParser to construct
     a new instance. Additionally, it has a positional argument `main`,
-    which takes the main function of the script `dargparse` library called.
+    which takes the main function of the script `dsargparse` library called.
     From the main function, it extracts doctstings to set command descriptions.
     """
 
