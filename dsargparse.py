@@ -18,9 +18,11 @@ import itertools
 import inspect
 import textwrap
 
+# Load objects defined in argparse.
 for name in argparse.__all__:
     if name != "ArgumentParser":
         globals()[name] = getattr(argparse, name)
+__all__ = argparse.__all__
 
 
 _HELP = "help"
