@@ -11,6 +11,13 @@ and provides a helper function which parses args and run a selected command.
 Using this library, you don't need to write same texts in docstrings, help,
 and description.
 
+Install
+---------
+Use `pip` to install from [PyPi](https://pypi.python.org/pypi?:action=display&name=dsargparse).
+```
+$ pip install -U dsargparse
+```
+
 Example
 ---------
 Suppose to make a following trivial greeting command consists of two subcommands
