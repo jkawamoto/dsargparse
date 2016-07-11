@@ -142,12 +142,12 @@ class ArgumentParser(argparse.ArgumentParser):
 
     This customized ArgumentParser will add help and description automatically
     based on docstrings of main module and functions implements processes of
-    each command. It also provides `parse_and_run` method which helps parsing
+    each command. It also provides :meth:`parse_and_run` method which helps parsing
     arguments and executing functions.
 
     This class takes same arguments as argparse.ArgumentParser to construct
-    a new instance. Additionally, it has a positional argument `main`,
-    which takes the main function of the script `dsargparse` library called.
+    a new instance. Additionally, it has a positional argument ``main``,
+    which takes the main function of the script ``dsargparse`` library called.
     From the main function, it extracts doctstings to set command descriptions.
     """
 
@@ -164,9 +164,8 @@ class ArgumentParser(argparse.ArgumentParser):
     def add_subparsers(self, **kwargs):
         """Add subparsers.
 
-        Args:
-          kwargs: same keywords arguments as
-            argparse.ArgumentParser.add_subparsers.
+        Keyword Args:
+          same keywords arguments as ``argparse.ArgumentParser.add_subparsers``.
 
         Returns:
           an instance of action class which is used to add sub parsers.
@@ -178,18 +177,20 @@ class ArgumentParser(argparse.ArgumentParser):
         """Add an argument.
 
         This method adds a new argument to the current parser. The function is
-        same as argparse.ArgumentParser.add_argument. However, this method
+        same as ``argparse.ArgumentParser.add_argument``. However, this method
         tries to determine help messages for the adding argument from some
         docstrings.
 
         If the new arguments belong to some sub commands, the docstring
-        of a function implements behavior of the sub command has `Args:` section,
+        of a function implements behavior of the sub command has ``Args:`` section,
         and defines same name variable, this function sets such
         definition to the help message.
 
-        Args:
-          *args: same positional arguments as argparse.ArgumentParser.add_argument.
-          **kwargs: same keywards arguments as argparse.ArgumentParser.add_argument.
+        Positional Args:
+          same positional arguments as argparse.ArgumentParser.add_argument.
+
+        Keyword Args:
+          same keywards arguments as argparse.ArgumentParser.add_argument.
         """
         if _HELP not in kwargs:
             for name in args:
@@ -202,11 +203,11 @@ class ArgumentParser(argparse.ArgumentParser):
     def parse_and_run(self, **kwargs):
         """Parse arguments and run the selected command.
 
-        Args:
-          kwargs: same keywords arguments as argparse.ArgumentParser.parse_args.
+        Keyword Args:
+          same keywords arguments as ``argparse.ArgumentParser.parse_args``.
 
         Returns:
-          any value the selected command returns. It could be None.
+          any value the selected command returns. It could be ``None``.
         """
         return self._dispatch(**vars(self.parse_args(**kwargs)))
 
