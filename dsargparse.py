@@ -160,7 +160,8 @@ class ArgumentParser(argparse.ArgumentParser):
     def __init__(self, main=None, argmap=None, *args, **kwargs):
         if main:
             if _DESCRIPTION not in kwargs or not kwargs[_DESCRIPTION]:
-                kwargs[_DESCRIPTION] = inspect.getmodule(main).__doc__
+                info = _parse_doc(inspect.getmodule(main).__doc__)
+                kwargs[_DESCRIPTION] = info[_DESCRIPTION]
             if _FORMAT_CLASS not in kwargs or not kwargs[_FORMAT_CLASS]:
                 kwargs[_FORMAT_CLASS] = argparse.RawTextHelpFormatter
         self.__argmap = argmap if argmap else {}
