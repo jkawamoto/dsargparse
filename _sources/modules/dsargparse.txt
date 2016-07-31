@@ -1,0 +1,7 @@
+dsargparse module
+=================
+
+.. automodule:: dsargparse
+    :members:
+    :undoc-members:
+    :show-inheritance:

@@ -1,0 +1,422 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>dsargparse &mdash; dsargparse 0.2.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="dsargparse 0.2.0 documentation" href="../index.html"/>
+        <link rel="up" title="Module code" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> dsargparse
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../example.html">Simple Example</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules/dsargparse.html">dsargparse module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">dsargparse</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+        <li><a href="index.html">Module code</a> &raquo;</li>
+      
+    <li>dsargparse</li>
+    <li class="wy-breadcrumbs-aside">
+      
+          
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for dsargparse</h1><div class="highlight"><pre>
+<span></span><span class="c1">#</span>
+<span class="c1"># dsargparse.py</span>
+<span class="c1">#</span>
+<span class="c1"># Copyright (c) 2016 Junpei Kawamoto</span>
+<span class="c1">#</span>
+<span class="c1"># This software is released under the MIT License.</span>
+<span class="c1">#</span>
+<span class="c1"># http://opensource.org/licenses/mit-license.php</span>
+<span class="c1">#</span>
+<span class="sd">&quot;&quot;&quot;dsargparse: docstring based argparse.</span>
+
+<span class="sd">dsargparse is a wrapper of argparse library which prepares helps and descriptions</span>
+<span class="sd">from docstrings. It also sets up functions to be run for each sub command,</span>
+<span class="sd">and provides a helper function which parses args and run a selected command.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">import</span> <span class="nn">textwrap</span>
+
+<span class="c1"># Load objects defined in argparse.</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">argparse</span><span class="o">.</span><span class="n">__all__</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">!=</span> <span class="s2">&quot;ArgumentParser&quot;</span><span class="p">:</span>
+        <span class="nb">globals</span><span class="p">()[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">argparse</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">__all__</span>
+
+
+<span class="n">_HELP</span> <span class="o">=</span> <span class="s2">&quot;help&quot;</span>
+<span class="n">_DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;description&quot;</span>
+<span class="n">_FORMAT_CLASS</span> <span class="o">=</span> <span class="s2">&quot;formatter_class&quot;</span>
+
+<span class="n">_KEYWORDS_ARGS</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Args:&quot;</span><span class="p">,)</span>
+<span class="n">_KEYWORDS_OTHERS</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Returns:&quot;</span><span class="p">,</span> <span class="s2">&quot;Raises:&quot;</span><span class="p">,</span> <span class="s2">&quot;Yields:&quot;</span><span class="p">,</span> <span class="s2">&quot;Usage:&quot;</span><span class="p">)</span>
+<span class="n">_KEYWORDS</span> <span class="o">=</span> <span class="n">_KEYWORDS_ARGS</span> <span class="o">+</span> <span class="n">_KEYWORDS_OTHERS</span>
+
+
+<span class="k">def</span> <span class="nf">_checker</span><span class="p">(</span><span class="n">keywords</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate a checker which tests a given value not starts with keywords.&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">_</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check a given value matches to keywords.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keywords</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="n">_</span>
+
+
+<span class="k">def</span> <span class="nf">_parse_doc</span><span class="p">(</span><span class="n">doc</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Parse a docstring.</span>
+
+<span class="sd">    Parse a docstring and extract three components; headline, description,</span>
+<span class="sd">    and map of arguments to help texts.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      doc: docstring.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">      a dictionary.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">descriptions</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">takewhile</span><span class="p">(</span><span class="n">_checker</span><span class="p">(</span><span class="n">_KEYWORDS</span><span class="p">),</span> <span class="n">lines</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">descriptions</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="se">\n\n</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">descriptions</span><span class="p">[</span><span class="mi">2</span><span class="p">:])))</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">takewhile</span><span class="p">(</span>
+        <span class="n">_checker</span><span class="p">(</span><span class="n">_KEYWORDS_OTHERS</span><span class="p">),</span>
+        <span class="n">itertools</span><span class="o">.</span><span class="n">dropwhile</span><span class="p">(</span><span class="n">_checker</span><span class="p">(</span><span class="n">_KEYWORDS_ARGS</span><span class="p">),</span> <span class="n">lines</span><span class="p">)))</span>
+    <span class="n">argmap</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+            <span class="n">kv</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">pair</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">kv</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">argmap</span><span class="p">[</span><span class="n">kv</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;:&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">kv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">headline</span><span class="o">=</span><span class="n">descriptions</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">argmap</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">_SubparsersWrapper</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Wrapper of the action object made by argparse.ArgumentParser.add_subparsers.</span>
+
+<span class="sd">    To create an instance, the constructor takes a reference to an instance of</span>
+<span class="sd">    the action class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;__delegate&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delegate</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__delegate</span> <span class="o">=</span> <span class="n">delegate</span>
+
+    <span class="k">def</span> <span class="nf">add_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add parser.</span>
+
+<span class="sd">        This method makes a new sub command parser. It takes same arguments</span>
+<span class="sd">        as add_parser() of the action class made by</span>
+<span class="sd">        argparse.ArgumentParser.add_subparsers.</span>
+
+<span class="sd">        In addition to, it takes one positional argument `func`, which is the</span>
+<span class="sd">        function implements process of this sub command. The `func` will be used</span>
+<span class="sd">        to determine the name, help, and description of this sub command. The</span>
+<span class="sd">        function `func` will also be set as a default value of `cmd` attribute.</span>
+
+<span class="sd">        If you want to choose name of this sub command, use keyword argument</span>
+<span class="sd">        `name`.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">          func: function implements the process of this command.</span>
+<span class="sd">          name: name of this command. If not give, the function name is used.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">          new ArgumentParser object.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">          ValueError: if the given function does not have docstrings.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">func</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">func</span><span class="o">.</span><span class="n">__doc__</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;No docstrings given in </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">__name__</span><span class="p">))</span>
+
+            <span class="n">info</span> <span class="o">=</span> <span class="n">_parse_doc</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">__doc__</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">_HELP</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">_HELP</span><span class="p">]:</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="n">_HELP</span><span class="p">]</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;headline&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">_DESCRIPTION</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">_DESCRIPTION</span><span class="p">]:</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="n">_DESCRIPTION</span><span class="p">]</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">_FORMAT_CLASS</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">_FORMAT_CLASS</span><span class="p">]:</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="n">_FORMAT_CLASS</span><span class="p">]</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">RawTextHelpFormatter</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">:</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">__name__</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s2">&quot;__name__&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="n">func</span>
+
+            <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__delegate</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">argmap</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;args&quot;</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="n">func</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__delegate</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">res</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__delegate</span><span class="o">.</span><span class="n">__repr__</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="ArgumentParser"><a class="viewcode-back" href="../modules/dsargparse.html#dsargparse.ArgumentParser">[docs]</a><span class="k">class</span> <span class="nc">ArgumentParser</span><span class="p">(</span><span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Customized ArgumentParser.</span>
+
+<span class="sd">    This customized ArgumentParser will add help and description automatically</span>
+<span class="sd">    based on docstrings of main module and functions implements processes of</span>
+<span class="sd">    each command. It also provides :meth:`parse_and_run` method which helps parsing</span>
+<span class="sd">    arguments and executing functions.</span>
+
+<span class="sd">    This class takes same arguments as argparse.ArgumentParser to construct</span>
+<span class="sd">    a new instance. Additionally, it has a positional argument ``main``,</span>
+<span class="sd">    which takes the main function of the script ``dsargparse`` library called.</span>
+<span class="sd">    From the main function, it extracts doctstings to set command descriptions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">main</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">argmap</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">main</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">_DESCRIPTION</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">_DESCRIPTION</span><span class="p">]:</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="n">_DESCRIPTION</span><span class="p">]</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmodule</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">.</span><span class="n">__doc__</span>
+            <span class="k">if</span> <span class="n">_FORMAT_CLASS</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">_FORMAT_CLASS</span><span class="p">]:</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="n">_FORMAT_CLASS</span><span class="p">]</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">RawTextHelpFormatter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__argmap</span> <span class="o">=</span> <span class="n">argmap</span> <span class="k">if</span> <span class="n">argmap</span> <span class="k">else</span> <span class="p">{}</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">ArgumentParser</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ArgumentParser.add_subparsers"><a class="viewcode-back" href="../modules/dsargparse.html#dsargparse.ArgumentParser.add_subparsers">[docs]</a>    <span class="k">def</span> <span class="nf">add_subparsers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add subparsers.</span>
+
+<span class="sd">        Keyword Args:</span>
+<span class="sd">          same keywords arguments as ``argparse.ArgumentParser.add_subparsers``.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">          an instance of action class which is used to add sub parsers.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_SubparsersWrapper</span><span class="p">(</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">ArgumentParser</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">add_subparsers</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="ArgumentParser.add_argument"><a class="viewcode-back" href="../modules/dsargparse.html#dsargparse.ArgumentParser.add_argument">[docs]</a>    <span class="k">def</span> <span class="nf">add_argument</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add an argument.</span>
+
+<span class="sd">        This method adds a new argument to the current parser. The function is</span>
+<span class="sd">        same as ``argparse.ArgumentParser.add_argument``. However, this method</span>
+<span class="sd">        tries to determine help messages for the adding argument from some</span>
+<span class="sd">        docstrings.</span>
+
+<span class="sd">        If the new arguments belong to some sub commands, the docstring</span>
+<span class="sd">        of a function implements behavior of the sub command has ``Args:`` section,</span>
+<span class="sd">        and defines same name variable, this function sets such</span>
+<span class="sd">        definition to the help message.</span>
+
+<span class="sd">        Positional Args:</span>
+<span class="sd">          same positional arguments as argparse.ArgumentParser.add_argument.</span>
+
+<span class="sd">        Keyword Args:</span>
+<span class="sd">          same keywards arguments as argparse.ArgumentParser.add_argument.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">_HELP</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__argmap</span><span class="p">:</span>
+                    <span class="n">kwargs</span><span class="p">[</span><span class="n">_HELP</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__argmap</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+                    <span class="k">break</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">ArgumentParser</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ArgumentParser.parse_and_run"><a class="viewcode-back" href="../modules/dsargparse.html#dsargparse.ArgumentParser.parse_and_run">[docs]</a>    <span class="k">def</span> <span class="nf">parse_and_run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Parse arguments and run the selected command.</span>
+
+<span class="sd">        Keyword Args:</span>
+<span class="sd">          same keywords arguments as ``argparse.ArgumentParser.parse_args``.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">          any value the selected command returns. It could be ``None``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dispatch</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)))</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_dispatch</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Dispatch parsed arguments to a command to be run.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">cmd</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Junpei Kawamoto.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,320 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta content="https://github.com/jkawamoto/dsargparse" name="github_url" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Simple Example &mdash; dsargparse 0.2.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="dsargparse 0.2.0 documentation" href="index.html"/>
+        <link rel="next" title="dsargparse module" href="modules/dsargparse.html"/>
+        <link rel="prev" title="dsargparse: docstring based argparse" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> dsargparse
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Simple Example</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules/dsargparse.html">dsargparse module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">dsargparse</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Simple Example</li>
+    <li class="wy-breadcrumbs-aside">
+      
+          
+          <a href="_sources/example.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="simple-example">
+<h1>Simple Example<a class="headerlink" href="#simple-example" title="Permalink to this headline">¶</a></h1>
+<p>Suppose to make a following trivial greeting command consists of two subcommands
+supplied as functions shown below.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Sample command of dsargparse package.</span>
+
+<span class="sd">This text will be used as description of this command.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span> <span class="nf">greeting</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span> <span class="c1"># pylint: disable=unused-argument</span>
+    <span class="sd">&quot;&quot;&quot;Print a greeting message.</span>
+
+<span class="sd">    This command print &quot;Good morning, &lt;title&gt; &lt;name&gt;.&quot;.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      title: title of the person.</span>
+<span class="sd">      name: name of the person.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Good morning, {title} {name}.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">locals</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="mi">0</span>
+
+
+<span class="k">def</span> <span class="nf">goodbye</span><span class="p">(</span><span class="n">name</span><span class="p">):</span> <span class="c1"># pylint: disable=unused-argument</span>
+    <span class="sd">&quot;&quot;&quot;Print a goodbye message.</span>
+
+<span class="sd">    This command print &quot;Goodbye, &lt;name&gt;.&quot;.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      name: name of the person say goodbye to.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Goodbye, {name}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">locals</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>The <cite>dsargparse</cite> reduces codes you need from the <strong>before</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Before dsargparse</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">textwrap</span>
+
+<span class="kn">import</span> <span class="nn">argparse</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; The main function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
+      <span class="n">description</span><span class="o">=</span><span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">        Sample command of argparse package.</span>
+
+<span class="s2">        This text will be used as description of this command.</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="p">))</span>
+    <span class="n">subparsers</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_subparsers</span><span class="p">()</span>
+
+    <span class="n">greeting_cmd</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span>
+        <span class="s2">&quot;greeting&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Print a greeting message.&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">            Print a greeting message.</span>
+
+<span class="s2">            This command print &quot;Good morning, &lt;title&gt; &lt;name&gt;&quot;.</span>
+<span class="s2">            &quot;&quot;&quot;</span><span class="p">))</span>
+    <span class="n">greeting_cmd</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;title of the person say greetings to&quot;</span><span class="p">)</span>
+    <span class="n">greeting_cmd</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;name of the person say greetings to.&quot;</span><span class="p">)</span>
+    <span class="n">greeting_cmd</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="n">greeting</span><span class="p">)</span>
+
+    <span class="n">goodbye_cmd</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span>
+        <span class="s2">&quot;goodbye&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Print a goodbye message.&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">            Print a goodbye message.</span>
+
+<span class="s2">            This command print &quot;Goodbye, &lt;name&gt;&quot;.</span>
+<span class="s2">            &quot;&quot;&quot;</span><span class="p">))</span>
+    <span class="n">goodbye_cmd</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;name of the person say goodbye to.&quot;</span><span class="p">)</span>
+    <span class="n">goodbye_cmd</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="n">goodbye</span><span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">args</span><span class="o">.</span><span class="n">cmd</span><span class="p">(</span><span class="o">**</span><span class="n">args</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>to the <strong>after</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># After dsargparse</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">import</span> <span class="nn">dsargparse</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; The main function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">dsargparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">main</span><span class="o">=</span><span class="n">main</span><span class="p">)</span>
+    <span class="n">subparsers</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_subparsers</span><span class="p">()</span>
+
+    <span class="n">greeting_cmd</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="n">greeting</span><span class="p">)</span>
+    <span class="n">greeting_cmd</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">)</span>
+    <span class="n">greeting_cmd</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+
+    <span class="n">goodbye_cmd</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="n">goodbye</span><span class="p">)</span>
+    <span class="n">goodbye_cmd</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_and_run</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="modules/dsargparse.html" class="btn btn-neutral float-right" title="dsargparse module" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="dsargparse: docstring based argparse" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Junpei Kawamoto.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
