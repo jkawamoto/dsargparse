@@ -30,7 +30,7 @@ _DESCRIPTION = "description"
 _FORMAT_CLASS = "formatter_class"
 
 _KEYWORDS_ARGS = ("Args:",)
-_KEYWORDS_OTHERS = ("Returns:", "Raises:", "Yields:")
+_KEYWORDS_OTHERS = ("Returns:", "Raises:", "Yields:", "Usage:")
 _KEYWORDS = _KEYWORDS_ARGS + _KEYWORDS_OTHERS
 
 
