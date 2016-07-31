@@ -5,7 +5,7 @@ import dsargparse
 
 setup(
     name="dsargparse",
-    version="0.2.0",
+    version="0.3.0",
     author="Junpei Kawamoto",
     author_email="kawamoto.junpei@gmail.com",
     description=dsargparse.__doc__,
@@ -15,7 +15,7 @@ setup(
     keywords="cli helper argparse",
     url="https://github.com/jkawamoto/dsargparse",
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 4 - Beta",
         "Environment :: Console",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",

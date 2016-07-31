@@ -3,11 +3,8 @@ dsargparse
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 [![Build Status](https://travis-ci.org/jkawamoto/dsargparse.svg?branch=master)](https://travis-ci.org/jkawamoto/dsargparse)
 [![Code Climate](https://codeclimate.com/github/jkawamoto/dsargparse/badges/gpa.svg)](https://codeclimate.com/github/jkawamoto/dsargparse)
-[![PyPi](https://img.shields.io/badge/pypi-0.2.0-lightgrey.svg)](https://pypi.python.org/pypi?:action=display&name=dsargparse)
+[![PyPi](https://img.shields.io/badge/pypi-0.3.0-lightgrey.svg)](https://pypi.python.org/pypi?:action=display&name=dsargparse)
 [![Japanese](https://img.shields.io/badge/qiita-%E6%97%A5%E6%9C%AC%E8%AA%9E-brightgreen.svg)](http://qiita.com/jkawamoto/items/7d8d179875222bf66bf8)
-
-
-
 
 dsargparse is a wrapper of argparse library which prepares helps and descriptions
 from docstrings. It also sets up functions to be run for each sub command,
