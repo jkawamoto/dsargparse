@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>dsargparse &mdash; dsargparse 0.2.0 documentation</title>
+  <title>dsargparse &mdash; dsargparse 0.3.0 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="dsargparse 0.2.0 documentation" href="../index.html"/>
+    <link rel="top" title="dsargparse 0.3.0 documentation" href="../index.html"/>
         <link rel="up" title="Module code" href="index.html"/> 
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.2.0
+                0.3.0
               </div>
             
           
@@ -297,7 +297,8 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">main</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">argmap</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">main</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">_DESCRIPTION</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">_DESCRIPTION</span><span class="p">]:</span>
-                <span class="n">kwargs</span><span class="p">[</span><span class="n">_DESCRIPTION</span><span class="p">]</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmodule</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">.</span><span class="n">__doc__</span>
+                <span class="n">info</span> <span class="o">=</span> <span class="n">_parse_doc</span><span class="p">(</span><span class="n">inspect</span><span class="o">.</span><span class="n">getmodule</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">.</span><span class="n">__doc__</span><span class="p">)</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="n">_DESCRIPTION</span><span class="p">]</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="n">_DESCRIPTION</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">_FORMAT_CLASS</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">_FORMAT_CLASS</span><span class="p">]:</span>
                 <span class="n">kwargs</span><span class="p">[</span><span class="n">_FORMAT_CLASS</span><span class="p">]</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">RawTextHelpFormatter</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__argmap</span> <span class="o">=</span> <span class="n">argmap</span> <span class="k">if</span> <span class="n">argmap</span> <span class="k">else</span> <span class="p">{}</span>
@@ -392,7 +393,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.2.0',
+            VERSION:'0.3.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
