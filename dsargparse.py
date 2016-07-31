@@ -74,7 +74,7 @@ def _parse_doc(doc):
         for pair in args[1:]:
             kv = [v.strip() for v in pair.split(":")]
             if len(kv) >= 2:
-                argmap[kv[0]] = kv[1]
+                argmap[kv[0]] = ":".join(kv[1:])
 
     return dict(headline=descriptions[0], description=description, args=argmap)
 
