@@ -30,7 +30,7 @@ _DESCRIPTION = "description"
 _FORMAT_CLASS = "formatter_class"
 
 _KEYWORDS_ARGS = ("Args:",)
-_KEYWORDS_OTHERS = ("Returns:", "Raises:", "Yields:")
+_KEYWORDS_OTHERS = ("Returns:", "Raises:", "Yields:", "Usage:")
 _KEYWORDS = _KEYWORDS_ARGS + _KEYWORDS_OTHERS
 
 
@@ -74,7 +74,7 @@ def _parse_doc(doc):
         for pair in args[1:]:
             kv = [v.strip() for v in pair.split(":")]
             if len(kv) >= 2:
-                argmap[kv[0]] = kv[1]
+                argmap[kv[0]] = ":".join(kv[1:])
 
     return dict(headline=descriptions[0], description=description, args=argmap)
 
@@ -90,7 +90,7 @@ class _SubparsersWrapper(object):
     def __init__(self, delegate):
         self.__delegate = delegate
 
-    def add_parser(self, func, name=None, **kwargs):
+    def add_parser(self, func=None, name=None, **kwargs):
         """Add parser.
 
         This method makes a new sub command parser. It takes same arguments
@@ -115,22 +115,28 @@ class _SubparsersWrapper(object):
         Raises:
           ValueError: if the given function does not have docstrings.
         """
-        if not func.__doc__:
-            raise ValueError("No docstrings given in {0}".format(func.__name__))
+        if func:
+            if not func.__doc__:
+                raise ValueError(
+                    "No docstrings given in {0}".format(func.__name__))
 
-        info = _parse_doc(func.__doc__)
-        if _HELP not in kwargs or not kwargs[_HELP]:
-            kwargs[_HELP] = info["headline"]
-        if _DESCRIPTION not in kwargs or not kwargs[_DESCRIPTION]:
-            kwargs[_DESCRIPTION] = info["description"]
-        if _FORMAT_CLASS not in kwargs or not kwargs[_FORMAT_CLASS]:
-            kwargs[_FORMAT_CLASS] = argparse.RawTextHelpFormatter
+            info = _parse_doc(func.__doc__)
+            if _HELP not in kwargs or not kwargs[_HELP]:
+                kwargs[_HELP] = info["headline"]
+            if _DESCRIPTION not in kwargs or not kwargs[_DESCRIPTION]:
+                kwargs[_DESCRIPTION] = info["description"]
+            if _FORMAT_CLASS not in kwargs or not kwargs[_FORMAT_CLASS]:
+                kwargs[_FORMAT_CLASS] = argparse.RawTextHelpFormatter
 
-        if not name:
-            name = func.__name__ if hasattr(func, "__name__") else func
+            if not name:
+                name = func.__name__ if hasattr(func, "__name__") else func
 
-        res = self.__delegate.add_parser(name, argmap=info["args"], **kwargs)
-        res.set_defaults(cmd=func)
+            res = self.__delegate.add_parser(name, argmap=info["args"], **kwargs)
+            res.set_defaults(cmd=func)
+
+        else:
+            res = self.__delegate.add_parser(name, **kwargs)
+
         return res
 
     def __repr__(self):
