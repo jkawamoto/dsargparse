@@ -57,6 +57,10 @@ project = u'dsargparse'
 copyright = u'2016, Junpei Kawamoto'
 author = u'Junpei Kawamoto'
 
+rst_prolog = """
+:github_url: https://github.com/jkawamoto/dsargparse
+"""
+
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
@@ -111,10 +115,6 @@ pygments_style = 'sphinx'
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
 
-rst_prolog = """
-.. meta::
-  :github_url: https://github.com/jkawamoto/dsargparse
-"""
 
 # -- Options for HTML output ----------------------------------------------
 
