@@ -1,0 +1,11 @@
+box: jkawamoto/ghp-box
+build:
+  steps:
+    - jkawamoto/sphinx:
+        basedir: docs
+        packages: sphinx_rtd_theme
+deploy:
+  steps:
+    - jkawamoto/ghp-import@0.1.0:
+        token: $GIT_TOKEN
+        basedir: docs/build/html
