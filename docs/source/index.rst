@@ -1,5 +1,8 @@
 dsargparse: docstring based argparse
 ======================================
+.. raw:: html
+
+   <div class="addthis_inline_share_toolbox"></div>
 
 ``dsargparse`` is a wrapper of argparse library which prepares helps and descriptions
 from docstrings. It also sets up functions to be run for each sub command,
