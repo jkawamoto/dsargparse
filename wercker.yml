@@ -13,4 +13,4 @@ deploy:
     - jkawamoto/ghp-import:
         token: $GIT_TOKEN
         basedir: docs/build/html
-        baseurl: https://jkawamoto.github.io/dsargparse
+        baseurl: https://jkawamoto.github.io/dsargparse/
