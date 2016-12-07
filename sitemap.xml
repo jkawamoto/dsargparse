@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  
+  <url>
+    <loc>https://jkawamoto.github.io/genindex.html</loc>
+    <lastmod>2016-12-07T20:43:05+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/py-modindex.html</loc>
+    <lastmod>2016-12-07T20:43:05+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/example.html</loc>
+    <lastmod>2016-12-07T20:43:05+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/index.html</loc>
+    <lastmod>2016-12-07T20:43:05+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/search.html</loc>
+    <lastmod>2016-12-07T20:43:05+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/_modules/dsargparse.html</loc>
+    <lastmod>2016-12-07T20:43:05+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/_modules/argparse.html</loc>
+    <lastmod>2016-12-07T20:43:05+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/_modules/index.html</loc>
+    <lastmod>2016-12-07T20:43:05+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/docs/build/html/genindex.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/docs/build/html/py-modindex.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/docs/build/html/example.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/docs/build/html/index.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/docs/build/html/search.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/docs/build/html/_modules/dsargparse.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/docs/build/html/_modules/argparse.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/docs/build/html/_modules/index.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/docs/build/html/modules/dsargparse.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/docs/build/html/modules/modules.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/modules/dsargparse.html</loc>
+    <lastmod>2016-12-07T20:43:05+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/modules/modules.html</loc>
+    <lastmod>2016-12-07T20:43:05+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-rtd-theme-master/sphinx_rtd_theme/layout_old.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-rtd-theme-master/sphinx_rtd_theme/versions.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-rtd-theme-master/sphinx_rtd_theme/breadcrumbs.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-rtd-theme-master/sphinx_rtd_theme/searchbox.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-rtd-theme-master/sphinx_rtd_theme/layout.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-rtd-theme-master/sphinx_rtd_theme/search.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-rtd-theme-master/sphinx_rtd_theme/footer.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sitemap-gen/tests/html/index.html</loc>
+    <lastmod>2016-12-07T20:43:06+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sitemap-gen/tests/html/sub/sub.html</loc>
+    <lastmod>2016-12-07T20:43:06+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/sphinx/themes/classic/layout.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/sphinx/themes/scrolls/layout.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/sphinx/themes/epub/epub-cover.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/sphinx/themes/epub/layout.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/sphinx/themes/nonav/layout.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/sphinx/themes/bizstyle/layout.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/sphinx/themes/haiku/layout.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/sphinx/themes/sphinxdoc/layout.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/sphinx/themes/pyramid/layout.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/sphinx/themes/agogo/layout.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/sphinx/themes/basic/relations.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/sphinx/themes/basic/genindex-single.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/sphinx/themes/basic/searchresults.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/sphinx/themes/basic/globaltoc.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/sphinx/themes/basic/genindex.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/sphinx/themes/basic/defindex.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/sphinx/themes/basic/domainindex.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/sphinx/themes/basic/searchbox.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/sphinx/themes/basic/page.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/sphinx/themes/basic/localtoc.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/sphinx/themes/basic/layout.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/sphinx/themes/basic/genindex-split.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/sphinx/themes/basic/search.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/sphinx/themes/basic/sourcelink.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/sphinx/themes/basic/changes/frameset.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/sphinx/themes/basic/changes/rstsource.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/sphinx/themes/basic/changes/versionchanges.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/tests/root/_templates/layout.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/tests/root/_templates/customsb.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/tests/root/_templates/contentssb.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/tests/root/testtheme/layout.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/tests/roots/test-intl/_templates/index.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/tests/roots/test-templating/_templates/layout.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/tests/roots/test-html_assets/subdir/_build/index.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/doc/_templates/indexsidebar.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/doc/_templates/index.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jkawamoto.github.io/src/sphinx-stable/doc/_themes/sphinx13/layout.html</loc>
+    <lastmod>2016-12-07T20:43:02+00:00</lastmod>
+  </url>
+  
+
+</urlset>
