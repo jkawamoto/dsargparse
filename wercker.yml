@@ -3,9 +3,13 @@ build:
   steps:
     - jkawamoto/sphinx:
         basedir: docs
-        packages: sphinx_rtd_theme
+        packages: sphinx-autobuild sphinxcontrib-napoleon -e git+https://github.com/snide/sphinx_rtd_theme#egg=sphinx_rtd_theme-master
+    - samueldebruyn/minify:
+        base_dir: docs/build/html
+        png: false
 deploy:
   steps:
     - jkawamoto/ghp-import:
         token: $GIT_TOKEN
         basedir: docs/build/html
+        baseurl: https://jkawamoto.github.io/dsargparse
