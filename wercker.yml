@@ -7,6 +7,7 @@ build:
     - samueldebruyn/minify:
         base_dir: docs/build/html
         png: false
+        js: false
 deploy:
   steps:
     - jkawamoto/ghp-import:
