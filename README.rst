@@ -218,7 +218,7 @@ This software is released under the MIT License, see
    :target: https://travis-ci.org/jkawamoto/dsargparse
 .. |Code Climate| image:: https://codeclimate.com/github/jkawamoto/dsargparse/badges/gpa.svg
    :target: https://codeclimate.com/github/jkawamoto/dsargparse
-.. |PyPi| image:: https://img.shields.io/badge/pypi-0.3.1-lightgrey.svg
+.. |PyPi| image:: https://img.shields.io/badge/pypi-0.3.2-lightgrey.svg
    :target: https://pypi.python.org/pypi?:action=display&name=dsargparse
 .. |Japanese| image:: https://img.shields.io/badge/qiita-%E6%97%A5%E6%9C%AC%E8%AA%9E-brightgreen.svg
    :target: http://qiita.com/jkawamoto/items/7d8d179875222bf66bf8

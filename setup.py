@@ -21,7 +21,7 @@ def read(fname):
 
 setup(
     name="dsargparse",
-    version="0.3.1",
+    version="0.3.2",
     author="Junpei Kawamoto",
     author_email="kawamoto.junpei@gmail.com",
     description=dsargparse.__doc__,
