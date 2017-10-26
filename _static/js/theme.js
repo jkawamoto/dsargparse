@@ -98,11 +98,26 @@ function ThemeNav () {
             try {
                 var link = $('.wy-menu-vertical')
                     .find('[href="' + anchor + '"]');
-                $('.wy-menu-vertical li.toctree-l1 li.current')
-                    .removeClass('current');
-                link.closest('li.toctree-l2').addClass('current');
-                link.closest('li.toctree-l3').addClass('current');
-                link.closest('li.toctree-l4').addClass('current');
+                // If we didn't find a link, it may be because we clicked on
+                // something that is not in the sidebar (eg: when using
+                // sphinxcontrib.httpdomain it generates headerlinks but those
+                // aren't picked up and placed in the toctree). So let's find
+                // the closest header in the document and try with that one.
+                if (link.length === 0) {
+                  var doc_link = $('.document a[href="' + anchor + '"]');
+                  var closest_section = doc_link.closest('div.section');
+                  // Try again with the closest section entry.
+                  link = $('.wy-menu-vertical')
+                    .find('[href="#' + closest_section.attr("id") + '"]');
+                }
+                // If we found a matching link then reset current and re-apply
+                // otherwise retain the existing match
+                if (link.length > 0) {
+                    $('.wy-menu-vertical li.toctree-l1 li.current').removeClass('current');
+                    link.closest('li.toctree-l2').addClass('current');
+                    link.closest('li.toctree-l3').addClass('current');
+                    link.closest('li.toctree-l4').addClass('current');
+                }
             }
             catch (err) {
                 console.log("Error expanding nav for anchor", err);
