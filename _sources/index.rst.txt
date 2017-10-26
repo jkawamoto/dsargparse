@@ -4,6 +4,11 @@ dsargparse: docstring based argparse
 
    <div class="addthis_inline_share_toolbox"></div>
 
+.. figure:: https://jkawamoto.github.io/dsargparse/_static/dsargparse.png
+  :alt: dsargparse
+
+  dsargparse
+
 ``dsargparse`` is a wrapper of argparse library which prepares helps and descriptions
 from docstrings. It also sets up functions to be run for each sub command,
 and provides a helper function which parses args and run a selected command.
