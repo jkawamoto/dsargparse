@@ -1,6 +1,15 @@
 language: python
 python:
-  - "2.7"
-  - "3.5"
+- '2.7'
+- '3.5'
 script:
-  - python setup.py test
+- python setup.py test
+deploy:
+  provider: pypi
+  user: jkawamoto
+  password:
+    secure: JsEJbwYysreK01+u8fmEoTlatVa+nnyzamuHjELJ+VtzlimAJYwJA/PqB2htCXQ/JnVSSg4vBSfJWS2A/TNSPgcZVzW4K5RM/IVTDB3wcCR69Di4J5NoCa+juAUxk42WQAS5OxstF4U8YVQDi8+cr4DL3EaN3Ew2u+CbkgwXUxMMKNtMHKp5lHXANkOWOX9FBBE0SIRoJ+ehek5ATR+O6xoPzwc/Tzha6v+gBAlPvLIlxjGgaqWCWnVy6a7Ew6b/c+O67TkNyJPINvf2ev1gtJ128lEObaBYVpUY3VvZA0Lt9ZAAlL7YdjIJpUUSxXOScGimYY3GvxJFGOa7CapQ5ShH3hoXZ48xBtaCKgNCgN8FkkYxMYofY+tNpE+KhWQz5/GM9OFHy2CO6BN/5T1RygIMdAInMv8bwwrDkpL0uP5cZgBkV1NyPfM60g0+2AREBK3ysxGYpO6dPiel8jK0jtH6MxslMT68dQTB9waB38kJWq9IT+avZMxlDivQH8nrw0zHXdt/Hh6LKfXZoZ+hcXbi+DVp3xTyltt7eDccZla79otWRtER9VyUiAzMxRKmYnrxDAzxcm578vLguOQNsTh0/9r0+YGAXD9VqLrniw9CiHtNCIn5M4TNHkmxeXBfTnIFmZoQ/jzg/aNhkrXtAM0klAKwtEztQsA+j9WqAMo=
+  on:
+    tags: true
+    distributions: sdist bdist_wheel
+    repo: jkawamoto/dsargparse
