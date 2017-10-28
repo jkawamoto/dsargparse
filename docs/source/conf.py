@@ -120,8 +120,15 @@ todo_include_todos = False
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-# html_theme = 'alabaster'
 html_theme = "sphinx_rtd_theme"
+html_context = {
+    "base_url": "https://jkawamoto.github.io/dsargparse/",
+    "twitter": "@junkawamoto",
+    "google_analytics": "UA-82315630-1",
+    "google_adsense": "ca-pub-4734862314145555",
+    "google_adsense_slot": "5670923420",
+    "addthis": "ra-57f529147128b1fb"
+}
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
