@@ -1,3 +1,7 @@
+> [!NOTE]
+> This repository is archived and no longer maintained.
+> For building command-line interfaces in Python, please use [Click](https://click.palletsprojects.com/) instead.
+
 dsargparse
 ==========
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
